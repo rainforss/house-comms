@@ -3,6 +3,7 @@ import db from "../../../middleware/db";
 import { withSessionRoute } from "../../../middleware/session";
 import { NextApiRequest, NextApiResponse } from "next";
 import { ObjectId } from "mongodb";
+import { client } from "../../../services/twilio";
 
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
@@ -20,18 +21,26 @@ router
     return res.status(200).json({ request });
   })
   .put(async (req, res) => {
+    if (!req.session.user) {
+      throw new Error("Not Authenticated");
+    }
+
     const { requestId } = req.query;
     const approvalStatus = req.body.request.approvalStatus;
     const approvalBy = req.body.request.approvalBy;
     const approvalAt = req.body.request.approvalAt;
     const approvalNote = req.body.request.approvalNote;
-    const result = await req.db.collection("requests").updateOne(
+    await req.db.collection("requests").updateOne(
       { _id: new ObjectId(requestId as string) },
       {
         $set: { approvalStatus, approvalBy, approvalAt, approvalNote },
       }
     );
-    console.log(result);
+    await client.messages.create({
+      body: `Hi, your access request has been '${approvalStatus}' by ${approvalBy}. Approval note: ${approvalNote}`,
+      from: "+15878000528",
+      to: "+15877785468",
+    });
     return res.status(200).json({ updated: true });
   });
 
