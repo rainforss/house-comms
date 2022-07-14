@@ -40,13 +40,18 @@ const Home: NextPage<HomePageProps> = ({ user }) => {
       w="100%"
       bg="linear-gradient(to top right, #fc2c77 0%, #6c4079 100%)"
     >
-      <Box h="90vh" w="90%" bg="white" borderRadius="10px">
+      <Box
+        h={{ base: "95vh", md: "90vh" }}
+        w="90%"
+        bg="white"
+        borderRadius="10px"
+      >
         <Box
           display={{ base: "flex" }}
           height="10vh"
           justifyContent={{ base: "space-between" }}
           alignItems={{ base: "center" }}
-          p="2rem"
+          p={{ base: "1rem", md: "2rem" }}
           borderBottom="0.5px solid rgba(0,0,0,0.1)"
         >
           <ButtonGroup variant="outline" spacing="6">
@@ -70,9 +75,11 @@ const Home: NextPage<HomePageProps> = ({ user }) => {
         </Box>
         {!isLoading && !isError && (
           <VStack
-            p="2rem"
+            p={{ base: "1rem", md: "2rem" }}
+            w="100%"
             height="80vh"
             overflowY="auto"
+            overflowX="hidden"
             divider={<StackDivider borderColor="gray.200" />}
             spacing={4}
             align="stretch"

@@ -37,7 +37,13 @@ const Request: NextPage<IRequestProps> = ({ user }) => {
       w="100%"
       bg="linear-gradient(to top right, #bdebaa 0%, #7dd956 100%)"
     >
-      <Box w="50%" h="90vh" bg="white" borderRadius="10px" p="2rem">
+      <Box
+        w={{ base: "90%", md: "50%" }}
+        h={{ base: "95vh", md: "90vh" }}
+        bg="white"
+        borderRadius="10px"
+        p={{ base: "0.5rem", md: "2rem" }}
+      >
         <Heading
           as="h2"
           p="1rem"
@@ -131,7 +137,6 @@ const Request: NextPage<IRequestProps> = ({ user }) => {
                   <Button
                     type="submit"
                     isLoading={props.isSubmitting}
-                    my="4rem"
                     bgColor="#173f5e"
                     color="white"
                     px="2rem"
@@ -142,7 +147,6 @@ const Request: NextPage<IRequestProps> = ({ user }) => {
                   <Button
                     as="a"
                     isLoading={props.isSubmitting}
-                    my="4rem"
                     colorScheme="red"
                     px="2rem"
                     py="1.5rem"

@@ -33,11 +33,12 @@ const RequestCard: React.FunctionComponent<IRequestCardProps> = ({
   return (
     <Box
       w="100%"
-      h="125px"
+      h={{ base: "auto", md: "125px" }}
       borderRadius="10px"
       p="1.5rem"
       bg="linear-gradient(to top right, #fc2c77 0%, #6c4079 100%)"
       display="flex"
+      flexDirection={{ base: "column", md: "row" }}
       justifyContent={{ base: "flex-start" }}
       style={{ gap: "3rem" }}
       alignItems={{ base: "center" }}
@@ -46,22 +47,25 @@ const RequestCard: React.FunctionComponent<IRequestCardProps> = ({
         name={request.requestedBy}
         src="https://bit.ly/broken-link"
       ></Avatar>
-      <Box h="100%" color="white">
+      <Box h={{ base: "auto", md: "100%" }} color="white">
         <Box
           display="flex"
+          flexDirection={{ base: "column", md: "row" }}
           justifyContent={{ base: "flex-start" }}
           alignItems={{ base: "center" }}
           style={{ gap: "1rem" }}
         >
-          <span>{request.requestType}</span>
-          <span>{request.accessTo}</span>
-          <span>
+          <small>{request.requestType}</small>
+          <small>{request.accessTo}</small>
+          <small>
             {new Date(request.entranceAt).toLocaleString("en-US", {
               timeZone: "MST",
             })}
-          </span>
+          </small>
         </Box>
-        <Box as="p">{request.requestReason}</Box>
+        <Box as="p" mt={{ base: "0.5rem", md: "0" }}>
+          {request.requestReason}
+        </Box>
       </Box>
       {request.approvalBy && (
         <Avatar name={request.approvalBy} src="https://bit.ly/broken-link">
@@ -75,20 +79,23 @@ const RequestCard: React.FunctionComponent<IRequestCardProps> = ({
         <Box h="100%" color="white">
           <Box
             display="flex"
+            flexDirection={{ base: "column", md: "row" }}
             justifyContent={{ base: "flex-start" }}
             alignItems={{ base: "center" }}
             style={{ gap: "1rem" }}
           >
-            <span>{request.approvalStatus}</span>
+            <small>{request.approvalStatus}</small>
             {request.approvalAt && (
-              <span>
+              <small>
                 {new Date(request.approvalAt).toLocaleString("en-US", {
                   timeZone: "MST",
                 })}
-              </span>
+              </small>
             )}
           </Box>
-          <Box as="p">{request.approvalNote}</Box>
+          <Box as="p" mt={{ base: "0.5rem", md: "0" }}>
+            {request.approvalNote}
+          </Box>
         </Box>
       )}
 

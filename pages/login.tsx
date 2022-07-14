@@ -24,8 +24,20 @@ const Login: NextPage<ILoginProps> = () => {
       w="100%"
       bg="linear-gradient(to top right, #bdebaa 0%, #7dd956 100%)"
     >
-      <Box w="30%" h="80vh" bg="white" borderRadius="10px" p="2rem">
-        <Heading as="h2" p="1rem" py="2rem" fontWeight="normal">
+      <Box
+        w={{ base: "90%", md: "30%" }}
+        h={{ base: "95vh", md: "90vh" }}
+        bg="white"
+        borderRadius="10px"
+        p={{ base: "0.5rem", md: "2rem" }}
+      >
+        <Heading
+          as="h2"
+          p="1rem"
+          py="2rem"
+          fontWeight="normal"
+          textAlign="center"
+        >
           Tenant Login
         </Heading>
         <Formik
